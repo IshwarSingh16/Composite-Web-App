@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <!-- above link for error favicon -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\css\Node.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+    <title>Deep Learning</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border: table-bordered;
+            background-color: azure;
+        }
+
+        table {
+            /* border-collapse: collapse; */
+            width: 100%;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        @media screen and (min-width: 400px) {
+            table {
+                width: 340px;
+            }
+        }
+
+        @media screen and (min-width: 400px) {
+            td {
+
+                height: 40px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- copied bootstrap -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark  fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">Deep Learning</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="#forward" class="nav-link">Forward Model</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#inverse" class="nav-link">Inverse Model</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#questions" class="nav-link">Questions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Showcase -->
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+        <div class="container py-5">
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <div>
+                    <h1>Designing<span class="text-warning"> Composites</span></h1>
+                    <p class=" my-3">
+                        Designing composite materials as per the application requirements is
+                        fundamentally a challenging
+                        and time consuming task. A computational framework based on a deep neural network can be
+                        used
+                        here to solve the forward (predictive) and reverse (generative) design challenge.
+                    </p>
+                </div>
+                <img class="img-fluid w-50 d-none d-sm-block p-5" src="static\img\developer.svg" alt="" />
+            </div>
+        </div>
+    </section>
+
+
+    <!-- end copied bootstrap -->
+
+
+    <!-- forward Model -->
+
+    <section class="p-5">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md p-5 ">
+
+                    <h2>Composite representation</h2>
+                    <br>
+
+                    <p>Either select the cells to fill the material with fibre in the
+                        matrix of
+                        the
+                        composite or Input the no of cells to be randomly filled with fibers and generate the composite.
+                    </p>
+
+                    <br>
+
+
+                    <form method="post" id="doform">
+
+                        <label>Enter the no of fibers in the composite</label>
+                        <input id="fiberNo" name="fiberNo" type="number" placeholder="0-64" required="required" />
+                        <br><br>
+
+                        <button type="submit" id="generativeButton">Generate</button>
+                        <!-- onclick="generaterandomfibers()" -->
+
+                    </form>
+
+                </div>
+
+
+                <div class="col-md">
+                    <br><br>
+                    <table class="center table-bordered" id="table">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    <br><br>
+
+                    <script>
+                        $(document).on('submit', '#doform', function (e) {
+
+                            e.preventDefault();
+                            // function generaterandomfibers() {
+                            var table = document.getElementById("table");
+
+                            for (var i = 0; i < 8; i++) {
+                                for (var j = 0; j < 8; j++) {
+
+                                    arr[i][j] = 0;
+                                    table.rows[i].cells[j].style.backgroundColor = 'azure';
+
+                                }
+                            }
+
+                            var randomarr = [];
+                            var size = $("#fiberNo").val();
+                            if (size > 64) { size = 64; }
+                            while (randomarr.length < size) {
+                                var r = Math.floor(Math.random() * 64);
+                                if (randomarr.indexOf(r) === -1) randomarr.push(r);
+                            }
+
+                            for (var i = 0; i < size; i++) {
+                                var row = parseInt(randomarr[i] / 8);
+                                var column = parseInt(randomarr[i] % 8);
+                                arr[row][column] = 1;
+                            }
+
+
+
+                            for (var i = 0; i < 8; i++) {
+                                for (var j = 0; j < 8; j++) {
+
+                                    if (arr[i][j] == 1) { table.rows[i].cells[j].style.backgroundColor = 'black'; }
+
+                                }
+                            }
+
+                            $("#result").empty();
+
+                            // }    
+                        })
+                    </script>
+
+                    <!-- predict button as a form -->
+
+                    <div class=" text-center">
+                        <form action="{{url_for('proceed')}}" method='POST'>
+                            <button type="submit" id="output">Proceed</button>
+                        </form>
+
+                        <br><br>
+                        <div id="result"></div>
+                        <br>
+                    </div>
+
+                </div>
+
+                <script>
+
+                    $("#output").click(function (e) {
+
+                        var pass = JSON.stringify(arr);
+                        console.log(arr)
+                        e.preventDefault();
+
+                        $.ajax({
+                            url: "{{url_for('proceed')}}",
+                            type: "POST",
+                            data: { 'Array0': arr[0], 'Array1': arr[1], 'Array2': arr[2], 'Array3': arr[3], 'Array4': arr[4], 'Array5': arr[5], 'Array6': arr[6], 'Array7': arr[7] },
+                            success: function (response) {
+                                // console.log(response);
+                                $("#result").empty();
+                                $("#result").append(response);
+
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+
+                        })
+
+                    })
+                </script>
+
+                <script src="static\js\Node.js"></script>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- bootstrap -->
+
+    <!-- Learn Sections -->
+
+    <section id="forward" class="p-5 bg-dark text-light">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md">
+                    <img src="static\img\question.svg" class="img-fluid w-75" alt="" />
+                </div>
+                <div class="col-md p-5">
+                    <h2>What the Model does</h2>
+                    <p class="lead">
+                        Composite predictive model:
+                    </p>
+                    <p>
+                        The forward model predicts the mechanical properties of the composite material with input fiber
+                        alignment. The model is trained on the data obtained from the FEM simulations on different
+                        compositions and configurations of the composite materials.
+                    </p>
+                    <a href="https://www.researchgate.net/publication/351342729_Deep_neural_networks_based_predictive-generative_framework_for_designing_composite_materials"
+                        class="btn btn-light mt-3">
+                        <i class="bi bi-chevron-right"></i> Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Gnereative model section html code  -->
+
+    <section class="p-5">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md p-5">
+                    <h2>Generating composite for given inputs</h2>
+                    <br>
+                    <p>You can select the constraint for volume fraction for the training of the Generative Model from
+                        the dropdown. By default there is no constraint on the no of fibers to be used.</p>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Select constraint
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><button class="dropdown-item" type="button" value="No constraint"
+                                    onclick="no_constraint()">No constraint</button>
+                            </li>
+                            <li><button class="dropdown-item" type="button" value="Enter Manually"
+                                    onclick="manually()">Enter
+                                    Manually</button></li>
+                            <li><button class="dropdown-item" type="button" value="Min no of fibers" onclick="min()">Min
+                                    no of
+                                    fibers</button></li>
+                        </ul>
+                    </div>
+                    <br><br>
+
+                    <script>
+                        var dropdown_function = 1;
+                        var continue_training = 0;
+                        var submittedAlready = 0;
+                        var switched_in_btwn = 0;
+                        var Id = -1;
+                        // var isfirstcall = 1;
+
+                        function no_constraint() {
+                            document.getElementById("passdrop").innerHTML = '<p>No constraint on no of fibers to be used.</p><br>'
+                            dropdown_function = 1;
+                            if (submittedAlready == 1) { switched_in_btwn = 1; }
+                        }
+                        function manually() {
+                            var codeBlock = '<p>Train the model for fixed no of fibers.</p>' + '<br>' +
+                                '<label>Number of fibres in composite</label>' +
+                                '<input id="volumeFraction" name="volumeFraction" type="text" placeholder="0-64" required="required" />' +
+                                '<br>'
+                            document.getElementById("passdrop").innerHTML = codeBlock
+                            dropdown_function = 2;
+                            if (submittedAlready == 1) { switched_in_btwn = 1; }
+                        }
+                        function min() {
+                            document.getElementById("passdrop").innerHTML = '<p>Train the model for min no of fibers.</p>' + '<br>'
+                            dropdown_function = 3;
+                            if (submittedAlready == 1) { switched_in_btwn = 1; }
+                        }
+                    </script>
+
+
+                    <form method="post" id="todoform">
+
+                        <div id='passdrop'>
+                            <p>No constraint on no of fibers to be used.</p><br>
+                        </div>
+
+                        <!-- <label>Number of fibres in composite</label>
+                        <input id="volumeFraction" name="volumeFraction" type="text" placeholder="0-64"
+                            required="required" />
+                        <br> -->
+
+                        <label>Elastic modulus in X-direction</label>
+                        <input id="X" name="X-direction" type="text" placeholder="Giga Pascal" required="required" />
+                        <br>
+
+                        <label>Elastic modulus in Y-direction</label>
+                        <input id="Y" name="Y-direction" type="text" placeholder="Giga Pascal" required="required" />
+                        <br><br>
+
+                        <button type="submit" id="generativeButton" onclick="continue_training = 0">Generate</button>
+
+                    </form>
+
+
+                    <style>
+                        label,
+                        input {
+                            display: block;
+                        }
+
+                        label {
+                            margin-bottom: 10px;
+                        }
+                    </style>
+                </div>
+
+
+                <div class="col-md">
+                    <br><br><br><br><br>
+                    <table class="center table-bordered" id="generativeTable">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+
+                    <div class="text-center" id="generative_image">
+                        <br><br>
+                        <div id="emptydiv"></div>
+                        <!-- {{addresult}}  -->
+                        <br>
+                        <!-- {{addoutput}} -->
+                    </div>
+
+                </div>
+            </div>
+
+            <script type="text/javascript">
+
+                $(document).on('submit', '#todoform', function (e) {
+
+                    e.preventDefault();
+
+                    submittedAlready++;
+
+                    var responses = 1;
+                    var nooffibers = $("#volumeFraction").val();
+                    if (nooffibers == undefined) { nooffibers = 150 * dropdown_function; }
+                    console.log(nooffibers)
+                    var E_X = $("#X").val();
+                    var E_Y = $("#Y").val();
+                    // if (continue_training == 0) { Id = -1; }
+
+                    function loadmodel() {
+
+                        // console.log(submittedAlready);
+                        console.log(responses);
+                        console.log(Id);
+
+                        $.ajax({
+                            url: "{{ url_for('generative_model_trial')}}",
+                            type: "POST",
+                            data: {
+                                "fibres": nooffibers,
+                                'E_x': E_X,
+                                'E_y': E_Y,
+                                'step': responses,
+                                'continue_train': continue_training,
+                                'dropdown_function': dropdown_function,
+                                'Identity': Id,
+                                // 'isfirstcall': isfirstcall,
+                            },
+                            success: function (array_pass) {
+
+                                if (array_pass == 'error') responses--;
+                                else if (array_pass == 'error_mssg') { $("#emptydiv").empty(); $("#emptydiv").append("Interrupted. Try again <br/> Please don't change the input values when continuing the training."); responses = 15; }
+                                else {
+                                    var arr = JSON.parse(array_pass);
+                                    console.log('success');
+
+                                    var mix = arr.print
+                                    Id = JSON.parse(arr.id)
+                                    arr = arr.array
+                                    var array = JSON.parse(arr);
+
+                                    $("#emptydiv").empty();
+                                    if (responses == 15) { submittedAlready = 0; document.getElementById("emptydiv").innerHTML = '<form id="todoform" method="POST"> <button type="submit" id="output" onclick = "continue_training = 1">Continue Training</button></form><br>' }
+                                    $("#emptydiv").append(mix);
+                                    var generative_table = document.getElementById("generativeTable");
+                                    for (var i = 0; i < generative_table.rows.length; i++) {
+                                        for (var j = 0; j < generative_table.rows[i].cells.length; j++) {
+                                            var value = 1.0 - parseFloat(array[i][j]).toFixed(2)
+                                            var color = parseInt(255.0 * value)
+                                            generative_table.rows[i].cells[j].style.backgroundColor = 'rgb(' + color + ', ' + color + ', ' + color + ')';
+                                        }
+                                    }
+                                }
+
+                            },
+                            complete: function (Event = event) {
+                                // console.log(event);
+                                event.preventDefault();
+                                if (submittedAlready > 1) { submittedAlready = 1; return; }
+                                else if (switched_in_btwn == 1) { switched_in_btwn = 0; submittedAlready = 0; $("#emptydiv").empty(); $("#emptydiv").append("Interrupted. Try again <br/> Please don't change the constraint while training"); return; }
+                                else {
+                                    if (responses < 15) {
+                                        responses++; loadmodel();
+                                    }
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        })
+
+                    }
+
+                    loadmodel();
+
+                })
+
+            </script>
+
+            <!-- trial copy from trial add  -->
+
+            <!-- end trial -->
+        </div>
+
+    </section>
+
+
+    <section id="inverse" class="p-5 bg-dark text-light">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md">
+                    <!-- <img src="static\img\question.svg" class="img-fluid w-75" alt="" /> -->
+                    <img src="static\img\fundamentals.svg" class="img-fluid w-75" alt="" />
+                </div>
+                <div class="col-md p-5">
+                    <h2>What the Model does</h2>
+                    <p class="lead">
+                        Composite Generative Model:
+                    </p>
+                    <p>
+                        Given the mechanical properties of the composite material, the generative model designs the
+                        composition and configuration of matrix and fiber in the composite based on the constraints.
+                        This model can also be applied to minimise the fibres necessary to achieve mechanical
+                        properties, and the number of fibres can also be included as a constraint with other mechanical
+                        properties.
+                    </p>
+                    <a href="https://www.researchgate.net/publication/351342729_Deep_neural_networks_based_predictive-generative_framework_for_designing_composite_materials"
+                        class="btn btn-light mt-3">
+                        <i class="bi bi-chevron-right"></i> Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Question Accordion -->
+
+    <section id="questions" class="p-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" id="questions">
+
+                <!-- Item 1 -->
+                <br>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question-one">
+                            Will I need to wait for the model to train every time I use the app?
+                        </button>
+                    </h2>
+                    <div id="question-one" class="accordion-collapse collapse" data-bs-parent="#questions">
+                        <div class="accordion-body">
+                            Yes. The generative model trains for every input constraints. You would have to wait for 15
+                            steps which trains the model for 50 epochs in each iteration.
+                            In case of forward model, at first time the model will load its weights, but after once it
+                            will work faster as the model won't load the weights again and again.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question-two">
+                            What does the result means?
+                        </button>
+                    </h2>
+                    <div id="question-two" class="accordion-collapse collapse" data-bs-parent="#questions">
+                        <div class="accordion-body">
+                            Depending upon the input the result will either give the mechanical properties or the
+                            composition
+                            of the composite
+                            material.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question-three">
+                            What do I need to Know?
+                        </button>
+                    </h2>
+                    <div id="question-three" class="accordion-collapse collapse" data-bs-parent="#questions">
+                        <div class="accordion-body">
+                            You dont need to know the machine learning fundamentals. It is very user friendly interface
+                            as you have to input the values and the model will train accordingly.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question-four">
+                            How can I contribute?
+                        </button>
+                    </h2>
+                    <div id="question-four" class="accordion-collapse collapse" data-bs-parent="#questions">
+                        <div class="accordion-body">
+                            You can try to contact IIT Ropar Faculty and proceed further on their decision.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <!-- <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question-five">
+                            Do you help me find a job?
+                        </button>
+                    </h2>
+                    <div id="question-five" class="accordion-collapse collapse" data-bs-parent="#questions">
+                        <div class="accordion-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                            beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                            totam tempora accusamus modi explicabo accusantium consequatur,
+                            praesentium rem quisquam molestias at quos vero. Officiis ad
+                            velit doloremque at. Dignissimos praesentium necessitatibus
+                            natus corrupti cum consequatur aliquam! Minima molestias iure
+                            quam distinctio velit.
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Generative model -->
+
+    <!-- <section id="learn" class="p-5 bg-dark text-light">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md p-5">
+                    <h2>Generative Model</h2>
+                    <p class="lead">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Similique deleniti possimus magnam corporis ratione facere!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
+                        reiciendis eius autem eveniet mollitia, at asperiores suscipit
+                        quae similique laboriosam iste minus placeat odit velit quos,
+                        nulla architecto amet voluptates?
+                    </p>
+                    <a href="#" class="btn btn-light mt-3">
+                        <i class="bi bi-chevron-right"></i> Read More
+                    </a>
+                </div>
+                <div class="col-md">
+                    <img src="static\img\fundamentals.svg" class="img-fluid w-75" alt="" />
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+
+    <!-- Footer -->
+    <!-- <footer class="p-5 bg-dark text-white text-center position-relative">
+        <div class="container">
+            <p class="lead">Deep Learning</p>
+
+            <a href="#" class="position-absolute bottom-0 end-0 p-5">
+                <i class="bi bi-arrow-up-circle h1"></i>
+            </a>
+        </div>
+    </footer> -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <!-- end-bootstrap -->
+
+
+    </div>
+
+</body>
+
+
+</html>

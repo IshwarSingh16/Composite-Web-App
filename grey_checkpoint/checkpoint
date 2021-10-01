@@ -1,0 +1,2 @@
+model_checkpoint_path: "grey_point"
+all_model_checkpoint_paths: "grey_point"
