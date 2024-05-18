@@ -22,4 +22,4 @@ RUN pipenv install --deploy --ignore-pipfile
 COPY . /app
 
 # Command to run the application
-CMD ["pipenv", "run", "gunicorn", "-w", "4", "-k", "gevent", "-b", "0.0.0.0:8000", "your_flask_app:app"]
+CMD ["pipenv", "run", "gunicorn", "-w", "4", "-k", "gevent", "-b", "0.0.0.0:8000", "app:app"]
