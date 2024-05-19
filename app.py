@@ -1,8 +1,6 @@
 from tensorflow.keras import Input, layers
 from tensorflow.keras.models import Model
 from tensorflow.keras import initializers
-import keras
-from keras.src.models import Sequential
 import math
 import tensorflow as tf
 import numpy as np
